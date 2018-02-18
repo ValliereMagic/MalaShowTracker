@@ -7,13 +7,15 @@ class ShowList:
         # shows : Show Objects
         self.shows = []
 
-    # takes a list of show objects, and the name of a specific show, then removes the show
-    # with the corresponding name if it is found.
-    # If a show with that name is not found, then the method returns None.
+    # Get show object, add to shows list
 
     def add_show(self):
         new_show = request_new_show()
         self.shows.append(new_show)
+
+    # takes a list of show objects, and the name of a specific show, then removes the show
+    # with the corresponding name if it is found.
+    # If a show with that name is not found, then the method returns None.
 
     def remove_show(self, show_name):
         show_with_index = self.find_show(show_name)
@@ -36,6 +38,9 @@ class ShowList:
             return True
 
         return False
+
+    # get show by name, increment season number, and set
+    # episodes_watched to 0.
 
     def increment_show_season(self, show_name):
         show_with_index = self.find_show(show_name)
