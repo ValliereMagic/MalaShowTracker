@@ -11,12 +11,12 @@ import CLI
 
 
 def init_database():
-    db_filename = "./data/shows.db"
+    db_filename = "../data/shows.db"
     db_is_new = not os.path.exists(db_filename)
 
     if db_is_new:
         with sqlite3.connect(db_filename) as connection:
-            with open("./data/ShowTable.sql", 'rt') as f:
+            with open("../data/ShowTable.sql", 'rt') as f:
                 schema = f.read()
                 connection.execute(schema)
                 return connection
