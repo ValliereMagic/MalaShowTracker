@@ -79,6 +79,15 @@ def help_input():
           "===============")
 
 
+# print out show object nicely (calls __str__ of show)
+
+
+def pretty_print_show(show):
+    print("----------------------------------")
+    print(show)
+    print("----------------------------------")
+
+
 def main():
     connection = init_database()
 
@@ -107,12 +116,11 @@ def main():
             show_list.remove_show(CLI.request_show_name())
 
         elif arg == "get_show":
-            print(show_list.find_show(CLI.request_show_name()).show)
+            pretty_print_show(show_list.find_show(CLI.request_show_name()).show)
 
         elif arg == "get_all_shows":
             for show in show_list.shows:
-                print(show)
-                print("----------------------------------")
+                pretty_print_show(show)
 
         elif arg == "increment_show_episode":
             show_list.increment_show(CLI.request_show_name())
