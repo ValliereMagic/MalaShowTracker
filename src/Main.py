@@ -62,44 +62,6 @@ def save_show_list(connection, show_list):
     connection.commit()
 
 
-# print user help screen
-
-
-def help_input():
-    print("MalaShowTracker\n" +
-          "===============\n" +
-          "Commands:\n" +
-          "add_show\n" +
-          "remove_show\n" +
-          "get_show\n" +
-          "get_all_shows\n" +
-          "increment_show_episode\n" +
-          "increment_show_season\n" +
-          "help\n" +
-          "===============")
-
-
-# print out show object nicely (calls __str__ of show)
-
-
-def pretty_print_show(show):
-    print("----------------------------------")
-    print(show)
-    print("----------------------------------")
-
-
-# confirmation : bool
-# action_type : string
-# print whether the users's action was successful or failed.
-
-
-def action_confirmation(confirmation, action_type):
-    if confirmation:
-        print("Completed " + action_type + " successfully.")
-    else:
-        print(action_type + " failed.")
-
-
 def main():
     connection = init_database()
 
@@ -126,34 +88,34 @@ def main():
 
         elif arg == "remove_show":
             confirmation = show_list.remove_show(CLI.request_show_name())
-            action_confirmation(confirmation, "show removal")
+            CLI.action_confirmation(confirmation, "show removal")
 
         elif arg == "get_show":
             requested_show_with_index = show_list.find_show(CLI.request_show_name())
 
             if requested_show_with_index is not None:
-                pretty_print_show(requested_show_with_index.show)
+                CLI.pretty_print_show(requested_show_with_index.show)
 
             else:
                 print("Entered Show does not exist.")
 
         elif arg == "get_all_shows":
             for show in show_list.shows:
-                pretty_print_show(show)
+                CLI.pretty_print_show(show)
 
         elif arg == "increment_show_episode":
             confirmation = show_list.increment_show(CLI.request_show_name())
-            action_confirmation(confirmation, "incrementing episode")
+            CLI.action_confirmation(confirmation, "incrementing episode")
 
         elif arg == "increment_show_season":
             confirmation = show_list.increment_show_season(CLI.request_show_name())
-            action_confirmation(confirmation, "incrementing season")
+            CLI.action_confirmation(confirmation, "incrementing season")
 
         else:
-            help_input()
+            CLI.help_input()
 
     if not entered_arg_loop:
-        help_input()
+        CLI.help_input()
 
     if not show_list == modify_check_list:
         save_show_list(connection, show_list)

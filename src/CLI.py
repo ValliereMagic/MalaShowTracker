@@ -30,5 +30,43 @@ def request_new_show():
     return create_show(show_name)
 
 
+# print user help screen
+
+
+def help_input():
+    print("MalaShowTracker\n" +
+          "===============\n" +
+          "Commands:\n" +
+          "add_show\n" +
+          "remove_show\n" +
+          "get_show\n" +
+          "get_all_shows\n" +
+          "increment_show_episode\n" +
+          "increment_show_season\n" +
+          "help\n" +
+          "===============")
+
+
 def request_show_name():
     return input("Enter the name of the show => ")
+
+
+# confirmation : bool
+# action_type : string
+# print whether the users's action was successful or failed.
+
+
+def action_confirmation(confirmation, action_type):
+    if confirmation:
+        print("Completed " + action_type + " successfully.")
+    else:
+        print(action_type + " failed.")
+
+
+# print out show object nicely (calls __str__ of show)
+
+
+def pretty_print_show(show):
+    print("----------------------------------")
+    print(show)
+    print("----------------------------------")
