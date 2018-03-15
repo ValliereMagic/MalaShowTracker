@@ -1,39 +1,33 @@
-from Show import create_show
-
-# asks user for information to make a new show
-# returns a new Show class
+import Show
 
 
-def request_new_show():
-    # show_name : string
-    # optional: episodes_watched : int
-    # episodes_watched_flag : string
-    # optional: season_number : int
-    # season_number_flag : string
+def request_new_show() -> Show.Show:
+    """
+    Asks user for information to make a new show
+    """
+    show_name: str = input("Enter the name of the show => ")
 
-    show_name = input("Enter the name of the show => ")
-
-    episodes_watched_flag = input("Have you already seen some episodes of the show? (y/n) => ")
+    episodes_watched_flag: str = input("Have you already seen some episodes of the show? (y/n) => ")
 
     if episodes_watched_flag.startswith("y"):
-        episodes_watched = input("Enter how many episodes you have already seen => ")
+        episodes_watched: int = int(input("Enter how many episodes you have already seen => "))
 
-        season_number_flag = input("Does this show have seasons? (y/n) => ")
+        season_number_flag: str = input("Does this show have seasons? (y/n) => ")
 
         if season_number_flag.startswith("y"):
-            season_number = input("Enter the season number you are on => ")
-            return create_show(show_name, int(episodes_watched), int(season_number))
+            season_number: int = int(input("Enter the season number you are on => "))
+            return Show.create_show(show_name, episodes_watched, season_number)
 
         else:
-            return create_show(show_name, int(episodes_watched))
+            return Show.create_show(show_name, episodes_watched)
 
-    return create_show(show_name)
-
-
-# print user help screen
+    return Show.create_show(show_name)
 
 
 def help_input():
+    """
+    Print user help screen
+    """
     print("MalaShowTracker\n" +
           "===============\n" +
           "Commands:\n" +
@@ -47,26 +41,24 @@ def help_input():
           "===============")
 
 
-def request_show_name():
+def request_show_name() -> str:
     return input("Enter the name of the show => ")
 
 
-# confirmation : bool
-# action_type : string
-# print whether the users's action was successful or failed.
-
-
-def action_confirmation(confirmation, action_type):
+def action_confirmation(confirmation: bool, action_type: str):
+    """
+    Print whether the user's action was successful or failed
+    """
     if confirmation:
         print("Completed " + action_type + " successfully.")
     else:
         print(action_type + " failed.")
 
 
-# print out show object nicely (calls __str__ of show)
-
-
-def pretty_print_show(show):
+def pretty_print_show(show: Show.Show):
+    """
+    Print out show object nicely (calls __str__ of show)
+    """
     print("----------------------------------")
     print(show)
     print("----------------------------------")
